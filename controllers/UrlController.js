@@ -5,12 +5,12 @@ const UrlResolver = require('../services/UrlResolver')
 
 class UrlController {
 
-  async getUrl(){
+  async getUrl(checkin, checkout){
     try {
-      const url = await UrlResolver.getParsedUrl()
+      const url = await UrlResolver.getParsedUrl(checkin, checkout)
       return url
     } catch (error) {
-      return error
+      return error.message
     }
   }
 }

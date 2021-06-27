@@ -4,7 +4,10 @@ const SearchController = require('../controllers/SearchController')
 
 
 router.get('/', (req, res) => {
-    res.send('Hello Asksuite World!');
+    res.send({
+        message: 'Hello Asksuite World!',
+        version: process.env.VERSION
+    });
 });
 
 router.post('/search', SearchController.search);
