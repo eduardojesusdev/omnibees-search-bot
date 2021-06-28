@@ -3,12 +3,33 @@
 const Browser = require('./BrowserController')
 const Url = require('./UrlController')
 const Crawler = require('./CrawlerController')
+const validator = require('validator');
 
 class SearchController {
-  async search(req, res){
-    try {
-      const {checkin, checkout} = await req.body
 
+  async search(req, res){
+
+    const { checkin, checkout } = req.body
+
+    if (!await validator.isDate(checkin)) {
+      return res
+      .status(400)
+      .send({
+        message: 'checkin invalid date'
+      })
+    }
+
+    if (!await validator.isDate(checkout)) {
+      return res
+      .status(400)
+      .send({
+        message: 'checkout invalid date'
+      })
+    }
+
+    console.log()
+
+    try {
       const url = await Url.getUrl(checkin, checkout)
       const html = await Browser.getContentOfUrl(url)
       const scrap = await Crawler.getData(html)
@@ -24,7 +45,7 @@ class SearchController {
       res
       .status(400)
       .send({
-        error: error.message,
+        error: error,
         message: "An error ocurred, try again"
       })
     }
