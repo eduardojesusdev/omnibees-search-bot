@@ -6,7 +6,6 @@ const Crawler = require('./CrawlerController')
 
 class SearchController {
   async search(req, res){
-
     try {
       const {checkin, checkout} = await req.body
 
@@ -14,14 +13,14 @@ class SearchController {
       const html = await Browser.getContentOfUrl(url)
       const scrap = await Crawler.getData(html)
 
-      // console.log(scrap)
-
       return res
-      .status(400)
-      .send()
+      .status(200)
+      .send({
+        url: url,
+        rooms: scrap
+      })
 
     } catch (error) {
-      browser.closeBrowser()
       res
       .status(400)
       .send({
@@ -29,8 +28,6 @@ class SearchController {
         message: "An error ocurred, try again"
       })
     }
-
-
   }
 
 }
