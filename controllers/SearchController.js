@@ -1,8 +1,8 @@
 'use strict'
 
-const browser = require('./BrowserController')
+const Browser = require('./BrowserController')
 const Url = require('./UrlController')
-const craw = require('./CrawlerController')
+const Crawler = require('./CrawlerController')
 
 class SearchController {
   async search(req, res){
@@ -10,24 +10,18 @@ class SearchController {
     try {
       const {checkin, checkout} = await req.body
 
-
       const url = await Url.getUrl(checkin, checkout)
+      const html = await Browser.getContentOfUrl(url)
+      const scrap = await Crawler.getData(html)
 
-      const html = await browser.getContentOfUrl(url)
-
-      console.log(html)
-
-      const scrap = craw.getData(html)
-
+      // console.log(scrap)
 
       return res
       .status(400)
       .send()
 
-      
-
-
     } catch (error) {
+      browser.closeBrowser()
       res
       .status(400)
       .send({

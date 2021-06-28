@@ -4,22 +4,8 @@ class BrowserService {
 
     static getBrowser() {
         return puppeteer.launch({
-                headless: false
-            },
-            {
-                args: [
-                    '--disable-gpu',
-                    '--disable-dev-shm-usage',
-                    '--disable-setuid-sandbox',
-                    '--no-first-run',
-                    '--no-sandbox',
-                    '--no-zygote',
-                    '--single-process', // <- this one doesn't works in Windows
-                    "--proxy-server='direct://'",
-                    '--proxy-bypass-list=*'
-                ]
-            }
-        )
+          headless: false
+        })
     }
 
     static closeBrowser(browser) {
