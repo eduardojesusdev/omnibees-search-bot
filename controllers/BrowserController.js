@@ -5,11 +5,13 @@ const BrowserService = require('../services/BrowserService')
 
 class BrowserController {
 
-  async goTo(url){
+  async getContentOfUrl(url){
     try {
-      const browser = BrowserService.getBrowser()
-      browser.goTo(UrlResolver.getParsedUrl(process.env.CRAW_BASE_URL))
-      return browser
+      const browser = await BrowserService.getBrowser()
+      const page = await browser.newPage()
+      await page.goto(url)
+      const html = await page.content();
+      return html
     } catch (error) {
       return error
     }

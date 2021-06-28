@@ -2,7 +2,6 @@
 
 const queryString = require('query-string')
 
-
 class UrlResolver {
   async getParsedUrl(checkin, checkout){
     try {
@@ -35,7 +34,7 @@ class UrlResolver {
       return urlEncoded
 
     } catch (error) {
-      return error
+      return error.message
     }
   }
 }

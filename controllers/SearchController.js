@@ -13,14 +13,18 @@ class SearchController {
 
       const url = await Url.getUrl(checkin, checkout)
 
-      // console.log(url)
+      const html = await browser.getContentOfUrl(url)
+
+      console.log(html)
+
+      const scrap = craw.getData(html)
 
 
       return res
       .status(400)
       .send()
 
-      const launch = browser.goTo()
+      
 
 
     } catch (error) {
