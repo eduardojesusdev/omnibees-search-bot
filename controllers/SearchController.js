@@ -27,8 +27,6 @@ class SearchController {
       })
     }
 
-    console.log()
-
     try {
       const url = await Url.getUrl(checkin, checkout)
       const html = await Browser.getContentOfUrl(url)
