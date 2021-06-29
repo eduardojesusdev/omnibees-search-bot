@@ -80,7 +80,7 @@ Already installed: `express` `puppeteer` `dotenv`
 * Install dependencies with: `npm install`
 * Run as dev: `npm run dev`
 
-Default port is set to `8080`
+Default port is set to `3000`
 
 ## Assets
 * Crawl URL sample (change dates): 
